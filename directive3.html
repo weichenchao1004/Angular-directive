@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>Angular Route</title>
+
+    <script src="bower_components/angular/angular.js"></script>
+
+    <script>
+        var app = angular.module('myapp',[]);
+        app.directive('helloWorld', function() {
+
+            return {
+                restrict: 'AE',
+                scope: {
+                    foo: '=',
+                    bar: '='
+                },
+                template: '<ul style="background-color: lightblue"><li>{{foo}}</li><li>{{bar}}</li></ul>',
+                link: function(scope, element, attrs) {
+                    element.bind('click', function() {
+                        scope.$apply(function() {
+                            scope.foo++;
+                            scope.bar++;
+                        })
+
+                    });
+                }
+            }
+
+        });
+
+        app.controller('MainCtrl', function($scope) {
+            $scope.foo = 0;
+            $scope.bar = 0;
+        });
+
+    </script>
+</head>
+<body ng-controller="MainCtrl">
+<hello-world foo="foo" bar="bar"></hello-world>
+</body>
+</html>
